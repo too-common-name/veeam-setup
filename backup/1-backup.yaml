@@ -1,0 +1,28 @@
+apiVersion: config.kio.kasten.io/v1alpha1
+kind: Policy
+metadata:
+  name: snapshot-policy
+  namespace: kasten-io
+spec:
+  comment: ""
+  frequency: "@onDemand"
+  paused: false
+  actions:
+    - action: backup
+    - action: export
+      exportParameters:
+        frequency: "@onDemand"
+        profile:
+          name: s3-storage
+          namespace: kasten-io
+        receiveString: ""
+        exportData:
+          enabled: true
+  retention: null
+  selector:
+    matchExpressions:
+      - key: k10.kasten.io/appNamespace
+        operator: In
+        values:
+          - backup-test
+  subFrequency: null

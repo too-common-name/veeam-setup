@@ -1,0 +1,21 @@
+apiVersion: config.kio.kasten.io/v1alpha1
+kind: Profile
+metadata:
+  name: s3-storage
+  namespace: kasten-io
+spec:
+  locationSpec:
+    credential:
+      secret:
+        apiVersion: v1
+        kind: secret
+        name: k10-bucket-secret
+        namespace: kasten-io
+      secretType: AwsAccessKey
+    objectStore:
+      name: test-kasten-backup-20250728
+      objectStoreType: S3
+      pathType: Directory
+      region: eu-north-1
+    type: ObjectStore
+  type: Location
